@@ -1,0 +1,80 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <div class="row">
+      <!-- Profile Image -->
+      <div class="col-md-4 text-center">
+        <%
+  
+  const defaultProfileImg = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+  const profileImg = user.profileImage?.url || defaultProfileImg;
+%>
+
+<!-- Profile Image -->
+<img src="<%= profileImg %>" 
+     class="img-fluid rounded-circle mb-3" 
+     style="width: 200px; height: 200px; object-fit: cover;" 
+     alt="Profile Image">
+
+<!-- Upload Form -->
+<form action="/profile?_method=PUT" method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="profileImage" class="form-label">Change Profile Picture</label>
+    <input type="file" class="form-control" name="profileImage" id="profileImage">
+  </div>
+  <button type="submit" class="btn btn-sm btn-outline-primary">Upload</button>
+</form>
+
+
+<!-- Remove Profile Picture Form -->
+<form action="/profile/remove-image?_method=PUT" method="POST" onsubmit="return confirm('Are you sure you want to remove your profile photo?');">
+  <button type="submit" class="btn btn-sm btn-outline-danger mt-2">Remove Photo</button>
+</form>
+      </div>
+
+      <!-- Profile Info -->
+      <div class="col-md-8">
+        <h3>Edit Profile</h3>
+        <form action="/profile?_method=PUT" method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" name="username" value="<%= user.username%>">
+          </div>
+  
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" value="<%= user.email%>">
+          </div>
+          
+
+
+          <div class="mb-3">
+            <label class="form-label">Bio</label>
+            <textarea class="form-control" name="bio" rows="3"><%= user.bio%></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Twitter</label>
+            <input type="text" class="form-control" name="twitter" value="<%= user.social?.twitter%>">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">LinkedIn</label>
+            <input type="text" class="form-control" name="linkedin" value="<%= user.social?.linkedin%>">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">GitHub</label>
+            <input type="text" class="form-control" name="github" value="<%= user.social?.github%>">
+          </div>
+           
+
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

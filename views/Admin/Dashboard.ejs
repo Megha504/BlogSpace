@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Admin Dashboard</h2>
+
+  <div class="row g-4 justify-content-center">
+
+    <div class="col-md-4">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <i class="fas fa-users fa-2x text-primary mb-2 mt-2"></i>
+          <h5 class="card-title">Total Users</h5>
+          <p class="display-6 fw-bold text-primary"><%= totalUsers %></p>
+          <a href="/admin/dashboard/users" class="btn btn-outline-primary btn-sm mt-2 mb-2">View All</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <i class="fas fa-file-alt fa-2x text-success mb-2 mt-2"></i>
+          <h5 class="card-title">Total Posts</h5>
+          <p class="display-6 fw-bold text-success"><%= totalPosts %></p>
+          <a href="/posts" class="btn btn-outline-success btn-sm mt-2 mb-2">Manage Posts</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <i class="fas fa-comments fa-2x text-danger mb-2 mt-2"></i>
+          <h5 class="card-title">Total Reviews</h5>
+          <p class="display-6 fw-bold text-danger"><%= totalReviews %></p>
+          <a href="/admin/dashboard/reviews" class="btn btn-outline-danger btn-sm mt-2 mb-2">Manage Reviews</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

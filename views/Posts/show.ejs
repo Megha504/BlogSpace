@@ -1,0 +1,112 @@
+<% layout("/layouts/boilerplate") %>
+
+
+<div class="card mb-5 mx-auto shadow-sm" style="max-width: 1000px; border: none;">
+  <div class="row g-0">
+
+    <!-- Left Panel -->
+    <div class="col-md-4 p-3 d-flex flex-column align-items-center justify-content-start">
+      
+      <!-- Blog Image -->
+      <img src="<%= post.coverImage.url %>" 
+           class="img-fluid mb-3 rounded"
+           style="height: 300px; object-fit: cover;" 
+           alt="Blog Image">
+
+      <!-- Review Form -->
+      <div class="card shadow-sm w-100 mb-4 p-3 border-0">
+        <h5 class="mb-3 fw-semibold"> Leave a Review</h5>
+        <form action="/posts/<%= post._id %>/reviews" method="POST" novalidate class="needs-validation">
+          <div class="star-rating mb-2">
+  <input type="hidden" name="review[rating]" id="starRatingInput" required>
+  <span class="star" data-value="1">&#9734;</span>
+  <span class="star" data-value="2">&#9734;</span>
+  <span class="star" data-value="3">&#9734;</span>
+  <span class="star" data-value="4">&#9734;</span>
+  <span class="star" data-value="5">&#9734;</span>
+</div>
+
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comments</label>
+            <textarea class="form-control" name="review[comment]" id="comment" rows="3" required></textarea>
+            <div class="invalid-feedback">Please enter a comment.</div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Submit Review</button>
+        </form>
+      </div>
+
+      <!-- Action Buttons -->
+     <div class="d-grid gap-2 w-100">
+  <a href="/posts" class="btn btn-outline-secondary">← Back to Posts</a>
+
+  <% if (currUser && (currUser._id.equals(post.owner._id) || currUser.isAdmin)) { %>
+    <div class="d-flex justify-content-between gap-2">
+      <a href="/posts/<%= post._id %>/edit" class="btn btn-sm mt-1 flex-fill" style="background-color:#3F51B5; color:white; max-width: 48%;">Edit</a>
+      <form action="/posts/<%= post._id %>?_method=DELETE" method="POST" class="w-100 mt-1" style="max-width: 48%;">
+        <button class="btn btn-danger btn-sm w-100">Delete</button>
+      </form>
+    </div>
+  <% } %>
+</div>
+
+          
+       
+    </div>
+
+    <!-- Right Panel -->
+    <div class="col-md-8 p-4">
+      <div class="card-body">
+        <h2 class="fw-bold mb-2"><%= post.title %></h2>
+        
+        <p class="text-muted mb-1">
+  <% if (post.tags && post.tags.length > 0) { %>
+    <%= post.tags.map(tag => tag.startsWith('#') ? tag : `#${tag}`).join(" ") %>
+  <% } %>
+</p>
+
+        <p class="mb-1"><strong>Category:</strong> <i><%= post.category %></i></p>
+        <p class="mb-3"><strong>Author:</strong> <i>@<%= post.owner.username %></i></p>
+        <hr>
+        <div class="card-text fs-6"><%- post.body %></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reader Reviews Section -->
+  <div class="p-4 mt-4">
+    <div class="card p-4 shadow-sm bg-light border-0">
+      <h4 class="fw-bold text-primary mb-4">Reader Reviews</h4>
+
+      <% if (post.reviews.length === 0) { %>
+        <p class="text-muted fst-italic">No reviews yet. Be the first to comment!</p>
+      <% } else { %>
+        <div class="row g-4">
+          <% for (let review of post.reviews) { %>
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body offset-1 mt-2">
+                  <h6 class="card-title text-dark">@<%= review.author.username %></h6>
+                  <p class="mb-1">
+  <strong>Rating:</strong>
+  <% for(let i = 1; i <= 5; i++) { %>
+    <% if (i <= review.rating) { %>
+      <span style="color: #FFD700;">&#9733;</span> <!-- filled star -->
+    <% } else { %>
+      <span style="color: #ddd;">&#9734;</span>   <!-- empty star -->
+    <% } %>
+  <% } %>
+</p>
+
+                  <p><%= review.comment %></p>
+                  <form method="POST" action="/posts/<%= post._id %>/reviews/<%= review._id %>?_method=DELETE">
+                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>

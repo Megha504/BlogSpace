@@ -1,0 +1,46 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <h2 class="mb-4">All Reviews</h2>
+
+  <% if (reviews.length === 0) { %>
+    <div class="alert alert-info">No reviews available.</div>
+  <% } else { %>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Review</th>
+            <th>Rating</th>
+            <th>Author</th>
+            <th>Post Title</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% reviews.forEach((review, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= review.comment %></td>
+              <td><%= review.rating %> stars</td>
+              <td><%= review.author?.username || "Unknown" %></td>
+              <td>
+                <a href="/posts/<%= review.post?._id %>" class="text-decoration-none">
+                  <%= review.post?.title || "Deleted Post" %>
+                </a>
+              </td>
+              <td>
+  <form action="/posts/<%= review.post?._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+
+    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this review?')">Delete</button>
+  </form>
+</td>
+
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>

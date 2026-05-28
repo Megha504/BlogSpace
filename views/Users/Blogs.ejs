@@ -1,0 +1,49 @@
+<% layout("/layouts/boilerplate") %>
+
+
+
+<div class="container mt-5">
+  <div class="row">
+    <% if (posts.length === 0) { %>
+      <div class="col-12 text-center">
+        <h4 class="text-muted">No posts available.</h4>
+      </div>
+    <% } %>
+
+    <% for (let post of posts) { %>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+          
+          <!-- Cover Image -->
+          <img src="<%= post.coverImage.url %>" 
+               class="card-img-top" 
+               style="height: 200px; object-fit: cover;" 
+               alt="Cover Image">
+
+          <!-- Post Content -->
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold"><%= post.title %></h5>
+
+            <div class="mb-2 text-muted small">
+              <%= post.category %> | 
+              <% if (post.tags && post.tags.length > 0) { %>
+                <%= post.tags.map(tag => `#${tag}`).join(" ") %>
+              <% } %>
+            </div>
+
+       <p class="card-text">
+  <%= post.body.replace(/<[^>]*>?/gm, '').slice(0, 120) %>...
+</p>
+
+
+            <div class="mt-auto">
+              <a href="/posts/<%= post._id %>" class="btn btn-sm btn-outline-primary w-100">
+                Read More
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>

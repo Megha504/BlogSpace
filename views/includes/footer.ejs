@@ -1,0 +1,119 @@
+<style>
+  .footer-container {
+    background-color: #2c3e50;
+    color: #eee;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .footer-links {
+    margin-top: 10px;
+  }
+
+  .footer-links a {
+    color: #ccc;
+    margin: 0 12px;
+    text-decoration: none;
+    position: relative;
+    font-size: 15px;
+  }
+
+  /* Wrapper for About, Contact, Categories */
+  .hover-wrapper {
+    display: inline-block;
+    position: relative;
+  }
+
+  /* Hidden card */
+  .hover-card {
+    display: none;
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    background-color: #fff;
+    color: #333;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    text-align: left;
+  }
+
+  .hover-wrapper:hover .hover-card {
+    display: block;
+  }
+
+  .social-icons {
+    margin-top: 10px;
+  }
+
+  .social-icons i {
+    margin: 0 8px;
+    color: white;
+    font-size: 18px;
+  }
+
+  .footer-bottom {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  ul.footer-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 5px 0 0;
+  }
+</style>
+
+<div class="footer-container">
+  <div class="footer-bottom">
+    © 2025 <strong>BlogSpace</strong> — A space for every voice.
+  </div>
+
+  <div class="footer-links">
+    <a href="/posts">Home</a>
+
+    <!-- About Hover -->
+    <div class="hover-wrapper">
+      <a href="#">About</a>
+      <div class="hover-card">
+        <p><strong>BlogSpace</strong> is a community for writers and thinkers to share their thoughts, stories, and voices freely.</p>
+      </div>
+    </div>
+
+    <!-- Contact Hover -->
+    <div class="hover-wrapper">
+      <a href="#">Contact</a>
+      <div class="hover-card">
+        <p><strong>Email:</strong> contact@blogspace.com</p>
+        <p><strong>Phone:</strong> +91-1234567890</p>
+        <p><strong>Location:</strong> Pune, India</p>
+      </div>
+    </div>
+
+    <!-- Categories Hover -->
+    <div class="hover-wrapper">
+      <a href="#">Categories</a>
+      <div class="hover-card">
+        <p>Explore topics like:</p>
+        <ul class="footer-list">
+          <li>Technology</li>
+          <li>Lifestyle</li>
+          <li>Education</li>
+          <li>Travel</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Social Icons (optional) -->
+  <div class="social-icons">
+    <i class="fab fa-x-twitter"></i>
+    <i class="fab fa-instagram"></i>
+    <i class="fab fa-facebook"></i>
+  </div>
+</div>

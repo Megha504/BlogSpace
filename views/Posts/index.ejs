@@ -1,0 +1,30 @@
+<% layout ("/layouts/boilerplate")%>
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <% for(let post of Posts){%>
+    <a href="/posts/<%=post._id%>" class="post-link">
+      <div class="card col">
+    <img src="<%=post.coverImage.url%>" class="card-img-top image">
+    <div class="card-img-overlay"></div>
+    <div class="card-body">
+    <h5 class="card-text"><%=post.title%></h5>
+     <div class="mb-2 text-muted small">
+              <%= post.category %> | 
+              <% if (post.tags && post.tags.length > 0) { %>
+                <%= post.tags.map(tag => `#${tag}`).join(" ") %>
+              <% } %>
+            </div>
+            <p class="card-text">
+  <%= post.body.replace(/<[^>]*>?/gm, '').slice(0, 120) %>...
+</p>
+
+     <!-- <p class="card-text"><%=post.body%></p>   -->
+   </div>
+    </div>
+
+    </a>
+    <%}%>
+
+</div>
+    
+
+
